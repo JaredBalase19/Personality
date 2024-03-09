@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Personality</title>
+</head>
+<body style="background-color:skyblue;">
+
+<h2 style="font-family:arial; color:Violet;"><center>Human Personality</center></h2>
+
+<form id="numerologyForm">
+  <label for="month"></label>Select birth month of a person:<br></label>
+  <select id="month" name="month">
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+  </select><br><br>
+  
+  <label for="day">Select birth day of a person:<br></label>
+  <select id="day" name="day">
+    <script>
+      for (var i = 1; i <= 31; i++) {
+        document.write('<option value="' + i + '">' + i + '</option>');
+      }
+    </script>
+  </select><br><br>
+
+  <input type="button" value="Submit" onclick="getPersonalityTraits()">
+</form>
+
+<div id="personalityTraits"></div>
+
+<script>
+function calculateNumerology(num) {
+  var sum = 0;
+  while (num > 0 || sum > 9) {
+    if (num == 0) {
+      num = sum;
+      sum = 0;
+    }
+    sum += num % 10;
+    num = Math.floor(num / 10);
+  }
+  return sum;
+}
+
+function getPersonalityTraits() {
+  var month = parseInt(document.getElementById("month").value);
+  var day = parseInt(document.getElementById("day").value);
+
+  var monthMeanings = [
+    "Independent and creative. People born in January are known for their originality and innovative thinking. They are often determined and ambitious, with a strong desire to succeed in their endeavors.",
+    "Sensitive and compassionate. Those born in February are empathetic and caring individuals. They value emotional connections and often prioritize the needs of others.",
+    "Charming and friendly. March-born individuals are sociable and charismatic. They have a natural ability to connect with people and are often admired for their pleasant demeanor.",
+    "Practical and disciplined. April-born individuals are focused and disciplined. They have a practical approach to life and are skilled at overcoming obstacles.",
+    "Adventurous and freedom-loving. People born in May are adventurous and free-spirited. They enjoy exploring new ideas and experiences, and value their independence.",
+    "Responsible and nurturing. June-born individuals are caring and nurturing by nature. They prioritize family and relationships, and are often seen as reliable and supportive.",
+    "Ambitious and goal-oriented. Those born in July are driven and ambitious. They set high goals for themselves and work diligently to achieve success.",
+    "Analytical and intuitive. August-born individuals are analytical thinkers with a keen intuition. They excel at problem-solving and are often sought after for their insights.",
+    "Compassionate and idealistic. People born in September are compassionate and idealistic. They have a strong sense of justice and are passionate about making a positive difference in the world.",
+    "Determined and persistent. October-born individuals are determined and persistent in their pursuits. They possess a strong work ethic and are willing to put in the effort to achieve their goals.",
+    "Inventive and original. Those born in November are creative and original thinkers. They have a unique perspective on the world and are often drawn to unconventional ideas.",
+    "Enthusiastic and optimistic. December-born individuals are optimistic and enthusiastic. They have a positive outlook on life and are skilled at finding joy in everyday experiences."
+  ];
+
+  var dayMeanings = [
+    "A leader with strong willpower. People born on this day are natural leaders who possess a strong sense of determination and willpower. They are not afraid to take charge and make bold decisions.",
+    "A sensitive and caring individual. Those born on this day are empathetic and compassionate. They have a deep understanding of others' feelings and are always willing to lend a helping hand.",
+    "An outgoing and charismatic person. People born on this day are charming and charismatic. They have a magnetic personality that draws others to them, and are skilled at making friends.",
+    "A hardworking and practical individual. Those born on this day are diligent and hardworking. They are not afraid to roll up their sleeves and get the job done, and are often admired for their practical approach to life.",
+    "An adventurous and versatile person. People born on this day are adventurous and versatile. They thrive on new experiences and are always eager to try new things.",
+    "A responsible and nurturing individual. Those born on this day are responsible and nurturing by nature. They take their commitments seriously and are dedicated to supporting those around them.",
+    "An analytical and intuitive thinker. People born on this day are analytical thinkers with a strong intuition. They have a knack for understanding complex problems and coming up with creative solutions.",
+    "A compassionate and idealistic person. Those born on this day are compassionate and idealistic. They are deeply committed to making the world a better place and are driven by a sense of purpose.",
+    "A dynamic and determined individual. People born on this day are dynamic and determined. They have a natural drive to succeed and are willing to put in the hard work to achieve their goals.",
+    "An inventive and creative thinker. Those born on this day are inventive and creative thinkers. They have a unique perspective on the world and are constantly coming up with new ideas.",
+    "A friendly and sociable person. People born on this day are friendly and sociable. They enjoy spending time with others and are skilled at building meaningful relationships.",
+    "An optimistic and enthusiastic individual. Those born on this day are optimistic and enthusiastic. They have a positive outlook on life and are always eager to embrace new opportunities.",
+    "An independent and original thinker. People born on this day are independent and original thinkers. They march to the beat of their own drum and are not afraid to challenge the status quo."
+  ];
+
+  var monthValue = calculateNumerology(month);
+  var dayValue = calculateNumerology(day);
+  dayValue = calculateNumerology(dayValue);
+
+  var totalValue = calculateNumerology(monthValue + dayValue);
+
+  var traits = "<br>" + monthMeanings[month - 1] + "<br><br>" + dayMeanings[dayValue - 1] + "<br><br> " + dayMeanings[totalValue - 1];
+
+  document.getElementById("personalityTraits").innerHTML = traits;
+}
+</script>
+
+</body>
+</html>
